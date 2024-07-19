@@ -16,7 +16,7 @@ My goal in making this site is actually just for my personal documentation when 
 - Understanding [Go](https://go.dev/) concurrency
 
 ## Currently in use
-- **Operating System:** [Windows 11](https://en.wikipedia.org/wiki/Windows_11) & [OpenSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/)
+- **Operating System:** [Windows 10](https://en.wikipedia.org/wiki/Windows_10) & [OpenSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/)
 - **Hosting:** [Netlify](https://netlify.com)
 - **Text Editor:** [Visual Studio Code](https://code.visualstudio.com/)
 
@@ -25,8 +25,7 @@ My goal in making this site is actually just for my personal documentation when 
 If you had something to discuss with me, you can reach me on these platforms
 
 - [Facebook](https://facebook.com/azemoning)
-- [X (formerly Twitter)](https://x.com/azemoning)
+- [Twitter](https://twitter.com/azemoning)
 - [Telegram](https://t.me/azemoning)
-- [Email](mailto:ahmadsaufimaulana@gmail.com)
 
 

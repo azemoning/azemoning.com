@@ -7,7 +7,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: `Upi's Digital Notes`,
+  title: `Upi's Dino`,
   tagline: 'Keeping the lights on, 24/7',
   favicon: 'img/favicon.ico',
 
@@ -59,7 +59,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Upi',
+        title: `Upi's Dino`,
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
