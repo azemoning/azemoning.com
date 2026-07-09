@@ -1,0 +1,23 @@
+[
+  {
+    "title": "SRE Observability Lab",
+    "description": "Monitoring stack with Prometheus and Grafana for production environments.",
+    "tags": ["Go", "Docker", "Kubernetes"],
+    "github": "https://github.com/azemoning/sre-observability-lab",
+    "featured": true
+  },
+  {
+    "title": "Ansible Labs",
+    "description": "Infrastructure automation exercises using Ansible playbooks.",
+    "tags": ["Ansible", "Python", "Linux"],
+    "github": "https://github.com/azemoning/ansible-labs",
+    "featured": true
+  },
+  {
+    "title": "CKA Prep",
+    "description": "Kubernetes certification preparation notes and practice labs.",
+    "tags": ["Kubernetes", "Docker", "YAML"],
+    "github": "https://github.com/azemoning/cka",
+    "featured": true
+  }
+]
