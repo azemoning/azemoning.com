@@ -1,0 +1,35 @@
+---
+// src/pages/about.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="About Azemoning - SRE/DevOps Engineer">
+  <article class="max-w-[720px] mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold mb-8">About Me</h1>
+
+    <div class="prose prose-lg">
+      <p class="text-muted mb-6">
+        I'm an SRE/DevOps engineer focused on infrastructure automation,
+        observability, and cloud-native technologies. I enjoy building reliable
+        systems and sharing knowledge through writing.
+      </p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-4">Skills</h2>
+      <div class="flex flex-wrap gap-2 mb-8">
+        {['Kubernetes', 'Docker', 'Terraform', 'Ansible', 'Go', 'Python', 'Prometheus', 'Grafana', 'Linux', 'AWS'].map(skill => (
+          <span class="text-sm px-3 py-1 border border-gray-200 rounded">{skill}</span>
+        ))}
+      </div>
+
+      <h2 class="text-xl font-semibold mt-8 mb-4">Contact</h2>
+      <ul class="space-y-2 text-muted">
+        <li>
+          <a href="https://github.com/azemoning" class="text-accent hover:underline">GitHub</a>
+        </li>
+        <li>
+          <a href="mailto:hello@azemoning.com" class="text-accent hover:underline">hello@azemoning.com</a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</BaseLayout>
