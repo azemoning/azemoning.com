@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://azemoning.com/sitemap-index.xml
