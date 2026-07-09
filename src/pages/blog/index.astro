@@ -1,0 +1,86 @@
+---
+// src/pages/blog/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = [...new Set(sortedPosts.map(post => post.data.category))];
+
+const POSTS_PER_PAGE = 10;
+const currentPage = 1;
+const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
+---
+
+<BaseLayout title="Blog" description="Articles on SRE, DevOps, and cloud-native technologies">
+  <section class="max-w-[720px] mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold mb-8">Blog</h1>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      <button class="category-btn text-sm px-3 py-1 border border-accent text-accent rounded active" data-category="all">
+        All
+      </button>
+      {categories.map(category => (
+        <button class="category-btn text-sm px-3 py-1 border border-gray-200 rounded hover:border-accent hover:text-accent transition-colors" data-category={category}>
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <div id="posts-list" class="space-y-8">
+      {paginatedPosts.map(post => (
+        <article class="post-item" data-category={post.data.category}>
+          <a href={`/blog/${post.data.slug ?? post.id}/`} class="group block">
+            <div class="flex items-center gap-4 text-sm text-muted mb-2">
+              <time datetime={post.data.date.toISOString()}>
+                {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <span>{post.data.category}</span>
+              <span>{post.data.readingTime}</span>
+            </div>
+            <h2 class="text-lg font-semibold group-hover:text-accent transition-colors mb-2">
+              {post.data.title}
+            </h2>
+            <p class="text-muted text-sm">{post.data.excerpt}</p>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {totalPages > 1 && (
+      <nav class="flex justify-center gap-4 mt-12">
+        <a href="/blog/2" class="px-4 py-2 border border-gray-200 rounded hover:border-accent hover:text-accent transition-colors">
+          Next →
+        </a>
+      </nav>
+    )}
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.dataset.category;
+
+      document.querySelectorAll('.category-btn').forEach(b => {
+        b.classList.remove('border-accent', 'text-accent', 'active');
+        b.classList.add('border-gray-200');
+      });
+      btn.classList.add('border-accent', 'text-accent', 'active');
+      btn.classList.remove('border-gray-200');
+
+      document.querySelectorAll('.post-item').forEach(item => {
+        if (category === 'all' || item.dataset.category === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
