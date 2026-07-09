@@ -1,0 +1,35 @@
+---
+// src/pages/projects.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import projects from '../data/projects.json';
+---
+
+<BaseLayout title="Projects" description="Portfolio of projects by Azemoning">
+  <section class="max-w-[1080px] mx-auto px-6 py-16">
+    <h1 class="text-3xl font-bold mb-8">Projects</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map(project => (
+        <div class="border border-gray-200 rounded-lg p-6 hover:border-accent/50 transition-colors">
+          <h2 class="text-lg font-semibold mb-2">{project.title}</h2>
+          <p class="text-sm text-muted mb-4">{project.description}</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            {project.tags.map(tag => (
+              <span class="text-xs px-2 py-1 bg-gray-100 rounded">{tag}</span>
+            ))}
+          </div>
+          <div class="flex gap-4">
+            <a href={project.github} target="_blank" rel="noopener noreferrer" class="text-sm text-accent hover:underline">
+              GitHub →
+            </a>
+            {project.live && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" class="text-sm text-accent hover:underline">
+                Live Demo →
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
