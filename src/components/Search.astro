@@ -26,7 +26,7 @@
 
       if (query.length < 2) {
         results.classList.add('hidden');
-        results.innerHTML = '';
+        results.replaceChildren();
         return;
       }
 
@@ -34,18 +34,32 @@
       const resultsData = await Promise.all(search.results.slice(0, 5).map(r => r.data()));
 
       if (resultsData.length === 0) {
-        results.innerHTML = '<div class="p-4 text-sm text-muted">No results found</div>';
+        const noResults = document.createElement('div');
+        noResults.className = 'p-4 text-sm text-muted';
+        noResults.textContent = 'No results found';
+        results.replaceChildren(noResults);
         results.classList.remove('hidden');
         return;
       }
 
-      results.innerHTML = resultsData.map(r => `
-        <a href="${r.url}" class="block p-4 hover:bg-gray-50 border-b border-gray-100 last:border-0">
-          <h4 class="text-sm font-semibold">${r.meta.title}</h4>
-          <p class="text-xs text-muted mt-1">${r.excerpt}</p>
-        </a>
-      `).join('');
+      const fragment = document.createDocumentFragment();
+      for (const r of resultsData) {
+        const link = document.createElement('a');
+        link.href = r.url;
+        link.className = 'block p-4 hover:bg-gray-50 border-b border-gray-100 last:border-0';
 
+        const title = document.createElement('h4');
+        title.className = 'text-sm font-semibold';
+        title.textContent = r.meta.title;
+
+        const excerpt = document.createElement('p');
+        excerpt.className = 'text-xs text-muted mt-1';
+        excerpt.textContent = r.excerpt;
+
+        link.append(title, excerpt);
+        fragment.append(link);
+      }
+      results.replaceChildren(fragment);
       results.classList.remove('hidden');
     });
 
