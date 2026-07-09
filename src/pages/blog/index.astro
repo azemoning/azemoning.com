@@ -1,6 +1,7 @@
 ---
 // src/pages/blog/index.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Search from '../../components/Search.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog', ({ data }) => {
@@ -30,6 +31,10 @@ const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
           {category}
         </button>
       ))}
+    </div>
+
+    <div class="mb-8">
+      <Search />
     </div>
 
     <div id="posts-list" class="space-y-8">
