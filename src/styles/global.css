@@ -104,12 +104,9 @@
   border: 1px solid #bfdbfe;
 }
 
-.prose code:not(pre code)::before {
-  content: "";
-}
-
+.prose code:not(pre code)::before,
 .prose code:not(pre code)::after {
-  content: "";
+  content: "" !important;
 }
 
 .prose pre {
