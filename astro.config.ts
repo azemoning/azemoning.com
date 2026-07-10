@@ -1,6 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import remarkGfm from 'remark-gfm';
+import remarkGithubBlockquoteAlert from 'remark-github-blockquote-alert';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -39,4 +43,14 @@ export default defineConfig({
       filter: (page) => !draftUrls.has(new URL(page).pathname),
     }),
   ],
+  markdown: {
+    remarkPlugins: [
+      remarkGfm,
+      remarkMath,
+      remarkGithubBlockquoteAlert,
+    ],
+    rehypePlugins: [
+      rehypeKatex,
+    ],
+  },
 });

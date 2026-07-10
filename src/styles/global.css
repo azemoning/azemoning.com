@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@import "katex/dist/katex.min.css";
 
 @theme {
   --color-background: #ffffff;
@@ -11,4 +12,112 @@
   --font-heading: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-code: 'JetBrains Mono', monospace;
+}
+
+/* GitHub-style callouts/alerts */
+blockquote:has(> [data-type="note"]),
+blockquote:has(> [data-type="tip"]),
+blockquote:has(> [data-type="warning"]),
+blockquote:has(> [data-type="caution"]) {
+  border-left-width: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+blockquote:has(> [data-type="note"]) {
+  border-left-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+blockquote:has(> [data-type="tip"]) {
+  border-left-color: #16a34a;
+  background-color: #f0fdf4;
+}
+
+blockquote:has(> [data-type="warning"]) {
+  border-left-color: #d97706;
+  background-color: #fffbeb;
+}
+
+blockquote:has(> [data-type="caution"]) {
+  border-left-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+/* Callout icons */
+blockquote:has(> [data-type="note"]) > p:first-child::before {
+  content: "📝 ";
+}
+
+blockquote:has(> [data-type="tip"]) > p:first-child::before {
+  content: "💡 ";
+}
+
+blockquote:has(> [data-type="warning"]) > p:first-child::before {
+  content: "⚠️ ";
+}
+
+blockquote:has(> [data-type="caution"]) > p:first-child::before {
+  content: "🚨 ";
+}
+
+/* Footnotes styling */
+.footnotes {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footnotes ol {
+  padding-left: 1.5rem;
+}
+
+.footnotes li {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Definition lists */
+dl {
+  margin: 1.5rem 0;
+}
+
+dt {
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+dd {
+  margin-left: 1.5rem;
+  color: #6b7280;
+}
+
+/* Keyboard keys */
+kbd {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: var(--font-code);
+  color: var(--color-text);
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 0 #d1d5db;
+}
+
+/* Details/Summary */
+details {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+details summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+details[open] summary {
+  margin-bottom: 1rem;
 }
