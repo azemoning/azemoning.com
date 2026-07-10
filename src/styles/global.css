@@ -76,16 +76,6 @@
 }
 
 /* Blog post content styling */
-.prose h2 {
-  color: #1e40af;
-  border-bottom: 2px solid #dbeafe;
-  padding-bottom: 0.5rem;
-}
-
-.prose h3 {
-  color: #166534;
-}
-
 .prose a {
   color: #2563eb;
   text-decoration: underline;
