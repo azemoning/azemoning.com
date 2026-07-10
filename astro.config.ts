@@ -1,11 +1,11 @@
 import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkGithubBlockquoteAlert from 'remark-github-blockquote-alert';
 import remarkDefinitionList from 'remark-definition-list';
-import remarkAbbr from 'remark-abbr';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -36,6 +36,9 @@ const draftUrls = getDraftUrls();
 
 export default defineConfig({
   site: 'https://azemoning.com',
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
     sitemap({
       filter: (page) => !draftUrls.has(new URL(page).pathname),
@@ -47,7 +50,6 @@ export default defineConfig({
       remarkMath,
       remarkGithubBlockquoteAlert,
       remarkDefinitionList,
-      remarkAbbr,
     ],
     rehypePlugins: [
       rehypeKatex,

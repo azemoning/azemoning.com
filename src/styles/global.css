@@ -1,7 +1,18 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "katex/dist/katex.min.css";
+
+@theme {
+  --color-background: #ffffff;
+  --color-text: #1a1a2e;
+  --color-accent: #2563eb;
+  --color-muted: #6b7280;
+  --color-code-bg: #f8fafc;
+
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+}
 
 /* GitHub-style callouts/alerts */
 blockquote:has(> [data-type="note"]),
