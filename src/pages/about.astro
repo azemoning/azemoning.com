@@ -1,23 +1,61 @@
 ---
 // src/pages/about.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const tagColors = ['blue', 'green', 'purple', 'orange', 'pink', 'cyan', 'red', 'yellow'];
+function getTagColor(tag: string) {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return tagColors[Math.abs(hash) % tagColors.length];
+}
+
+const skills = [
+  'Kubernetes', 'AWS', 'GCP', 'OpenShift', 'Docker', 'Helm',
+  'Terraform', 'Ansible', 'Jenkins', 'Prometheus', 'Grafana',
+  'Loki', 'OpenTelemetry', 'Elasticsearch', 'Dynatrace', 'Python', 'Linux'
+];
+
+const certifications = [
+  { name: 'Certified Kubernetes Administrator (CKA)', org: 'The Linux Foundation', valid: 'Valid until Jun 2028' },
+  { name: 'AWS Certified Solutions Architect – Associate', org: 'Amazon Web Services', valid: 'Valid until Nov 2028' },
+  { name: 'Red Hat OpenShift Administration III (DO380)', org: 'Red Hat', valid: '2024' },
+  { name: 'Google Cloud Professional Cloud Architect', org: 'Google Cloud', valid: '2022–2025' },
+];
 ---
 
-<BaseLayout title="About" description="About Azemoning - SRE/DevOps Engineer">
+<BaseLayout title="About" description="About Ahmad Saufi Maulana - Site Reliability & Cloud Platform Engineer">
   <article class="max-w-[720px] mx-auto px-6 py-16">
-    <h1 class="text-3xl font-bold mb-8">About Me</h1>
+    <h1 class="text-3xl font-bold mb-2">About Me</h1>
+    <p class="text-lg text-muted mb-8">Site Reliability & Cloud Platform Engineer</p>
 
     <div class="prose prose-lg">
-      <p class="text-muted mb-6">
-        I'm an SRE/DevOps engineer focused on infrastructure automation,
-        observability, and cloud-native technologies. I enjoy building reliable
-        systems and sharing knowledge through writing.
+      <p class="text-muted mb-6 leading-relaxed">
+        Cloud Platform Engineer at BCA, Indonesia's largest private bank, keeping
+        production platforms reliable at scale — Kubernetes/OpenShift clusters
+        running applications for developers across AWS, GCP, and on-premises
+        infrastructure. Former technical instructor who likes making complex
+        infrastructure simple.
       </p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-4">Certifications</h2>
+      <div class="space-y-3 mb-8">
+        {certifications.map(cert => (
+          <div class="flex items-start gap-3 p-3 border border-gray-200 rounded-lg">
+            <span class="text-accent mt-0.5">✓</span>
+            <div>
+              <p class="font-medium text-text">{cert.name}</p>
+              <p class="text-sm text-muted">{cert.org} · {cert.valid}</p>
+            </div>
+          </div>
+        ))}
+      </div>
 
       <h2 class="text-xl font-semibold mt-8 mb-4">Skills</h2>
       <div class="flex flex-wrap gap-2 mb-8">
-        {['Kubernetes', 'Docker', 'Terraform', 'Ansible', 'Go', 'Python', 'Prometheus', 'Grafana', 'Linux', 'AWS'].map(skill => (
-          <span class="text-sm px-3 py-1 border border-gray-200 rounded">{skill}</span>
+        {skills.map(skill => (
+          <span class={`tag tag-${getTagColor(skill)}`}>{skill}</span>
         ))}
       </div>
 
@@ -27,7 +65,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <a href="https://github.com/azemoning" class="text-accent hover:underline">GitHub</a>
         </li>
         <li>
-          <a href="mailto:hello@azemoning.com" class="text-accent hover:underline">hello@azemoning.com</a>
+          <a href="https://linkedin.com/in/ahmadsaufimaulana" class="text-accent hover:underline">LinkedIn</a>
+        </li>
+        <li>
+          <a href="mailto:ahmadsaufimaulana@gmail.com" class="text-accent hover:underline">ahmadsaufimaulana@gmail.com</a>
         </li>
       </ul>
     </div>
