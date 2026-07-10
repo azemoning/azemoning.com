@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  repository_dispatch:
+    types: [content-updated]
 
 permissions:
   contents: read
@@ -19,6 +21,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup SSH for private content repo
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.CONTENT_DEPLOY_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Clone private content
+        run: |
+          git clone git@github.com:azemoning/azemoning.com-content.git /tmp/content
+          cp -r /tmp/content/blog src/content/
+          cp /tmp/content/projects.json src/data/
 
       - name: Setup Node
         uses: actions/setup-node@v4
