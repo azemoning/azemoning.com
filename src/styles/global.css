@@ -104,8 +104,11 @@
   border: 1px solid #bfdbfe;
 }
 
-.prose code:not(pre code)::before,
-.prose code:not(pre code)::after {
+.prose :where(code):not(:where(pre) code)::before {
+  content: "" !important;
+}
+
+.prose :where(code):not(:where(pre) code)::after {
   content: "" !important;
 }
 
