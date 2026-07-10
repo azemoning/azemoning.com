@@ -27,6 +27,24 @@ const relatedPosts = allPosts
   .slice(0, 3);
 
 const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
+
+const categoryColors: Record<string, string> = {
+  'General': 'blue',
+  'Kubernetes': 'purple',
+  'SRE': 'green',
+  'DevOps': 'orange',
+  'Go': 'cyan',
+  'Docker': 'pink',
+};
+
+const tagColors = ['blue', 'green', 'purple', 'orange', 'pink', 'cyan', 'red', 'yellow'];
+function getTagColor(tag: string) {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return tagColors[Math.abs(hash) % tagColors.length];
+}
 ---
 
 <BaseLayout title={post.data.title} description={post.data.excerpt}>
@@ -53,12 +71,16 @@ const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
 
       <div class="max-w-[720px] flex-1">
         <header class="mb-8 border-b border-gray-100 pb-8">
-          <div class="flex items-center gap-4 text-sm text-muted mb-4">
-            <time datetime={post.data.date.toISOString()}>
+          <div class="flex items-center gap-3 text-sm mb-4">
+            <time datetime={post.data.date.toISOString()} class="text-muted">
               {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
             </time>
-            <span>{post.data.category}</span>
-            <span>{post.data.readingTime}</span>
+            <span class={`tag tag-${categoryColors[post.data.category] || 'blue'}`}>
+              {post.data.category}
+            </span>
+            <span class="text-muted bg-gray-100 px-2 py-0.5 rounded-full text-xs">
+              {post.data.readingTime}
+            </span>
           </div>
           <h1 class="text-3xl font-bold mb-4">{post.data.title}</h1>
           {post.data.lastUpdated && (
@@ -68,7 +90,7 @@ const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
           )}
           <div class="flex flex-wrap gap-2 mt-4">
             {post.data.tags.map(tag => (
-              <span class="text-xs px-2 py-1 bg-gray-100 rounded">{tag}</span>
+              <span class={`tag tag-${getTagColor(tag)}`}>{tag}</span>
             ))}
           </div>
         </header>
@@ -82,11 +104,11 @@ const toc = headings.filter(h => h.depth === 2 || h.depth === 3);
             <h2 class="text-xl font-semibold mb-6">Related Posts</h2>
             <div class="space-y-4">
               {relatedPosts.map(related => (
-                <a href={`/blog/${related.data.slug ?? related.id}/`} class="block group">
+                <a href={`/blog/${related.data.slug ?? related.id}/`} class="block group p-4 rounded-lg border border-gray-100 hover:border-accent/30 hover:shadow-md transition-all duration-300">
                   <h3 class="text-lg font-medium group-hover:text-accent transition-colors">
                     {related.data.title}
                   </h3>
-                  <p class="text-sm text-muted">{related.data.excerpt}</p>
+                  <p class="text-sm text-muted mt-1">{related.data.excerpt}</p>
                 </a>
               ))}
             </div>

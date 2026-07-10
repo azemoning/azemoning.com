@@ -2,6 +2,15 @@
 // src/pages/projects.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
 import projects from '../data/projects.json';
+
+const tagColors = ['blue', 'green', 'purple', 'orange', 'pink', 'cyan', 'red', 'yellow'];
+function getTagColor(tag: string) {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return tagColors[Math.abs(hash) % tagColors.length];
+}
 ---
 
 <BaseLayout title="Projects" description="Portfolio of projects by Azemoning">
@@ -10,12 +19,12 @@ import projects from '../data/projects.json';
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map(project => (
-        <div class="border border-gray-200 rounded-lg p-6 hover:border-accent/50 transition-colors">
+        <div class="border border-gray-200 rounded-lg p-6 hover:border-accent/50 hover:shadow-lg transition-all duration-300">
           <h2 class="text-lg font-semibold mb-2">{project.title}</h2>
           <p class="text-sm text-muted mb-4">{project.description}</p>
           <div class="flex flex-wrap gap-2 mb-4">
             {project.tags.map(tag => (
-              <span class="text-xs px-2 py-1 bg-gray-100 rounded">{tag}</span>
+              <span class={`tag tag-${getTagColor(tag)}`}>{tag}</span>
             ))}
           </div>
           <div class="flex gap-4">
