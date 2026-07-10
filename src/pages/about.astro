@@ -18,58 +18,155 @@ const skills = [
 ];
 
 const certifications = [
-  { name: 'Certified Kubernetes Administrator (CKA)', org: 'The Linux Foundation', valid: 'Valid until Jun 2028' },
-  { name: 'AWS Certified Solutions Architect – Associate', org: 'Amazon Web Services', valid: 'Valid until Nov 2028' },
-  { name: 'Red Hat OpenShift Administration III (DO380)', org: 'Red Hat', valid: '2024' },
-  { name: 'Google Cloud Professional Cloud Architect', org: 'Google Cloud', valid: '2022–2025' },
+  { name: 'Certified Kubernetes Administrator (CKA)', org: 'The Linux Foundation', valid: 'Valid until Jun 2028', icon: '⎈' },
+  { name: 'AWS Certified Solutions Architect – Associate', org: 'Amazon Web Services', valid: 'Valid until Nov 2028', icon: '☁' },
+  { name: 'Red Hat OpenShift Administration III (DO380)', org: 'Red Hat', valid: '2024', icon: '⚙' },
+  { name: 'Google Cloud Professional Cloud Architect', org: 'Google Cloud', valid: '2022–2025', icon: '🌐' },
+];
+
+const experience = [
+  {
+    title: 'Cloud Platform Engineer',
+    company: 'PT Bank Central Asia Tbk (BCA)',
+    period: 'Jul 2022 – Present',
+    highlights: [
+      'Keeping production platforms reliable at Indonesia\'s largest private bank',
+      'Operating Kubernetes/OpenShift clusters across AWS, GCP, and on-premises',
+      'Built an internal developer platform used by ~90% of developers',
+      'Participating in 24/7 on-call rotation (yes, I\'ve seen 3 AM alerts)',
+    ]
+  },
+  {
+    title: 'Technical Instructor',
+    company: 'Nacita Training Center',
+    period: 'Nov 2019 – Nov 2023',
+    highlights: [
+      'Taught Linux, DevOps, and cloud to working professionals',
+      'Learned that if you can\'t explain it simply, you don\'t understand it well enough',
+    ]
+  },
 ];
 ---
 
 <BaseLayout title="About" description="About Ahmad Saufi Maulana - Site Reliability & Cloud Platform Engineer">
   <article class="max-w-[720px] mx-auto px-6 py-16">
-    <h1 class="text-3xl font-bold mb-2">About Me</h1>
-    <p class="text-lg text-muted mb-8">Site Reliability & Cloud Platform Engineer</p>
+    <div class="mb-12">
+      <h1 class="text-3xl font-bold mb-2">About Me</h1>
+      <p class="text-lg text-accent">Ahmad Saufi Maulana</p>
+      <p class="text-muted">Site Reliability & Cloud Platform Engineer</p>
+    </div>
 
     <div class="prose prose-lg">
-      <p class="text-muted mb-6 leading-relaxed">
-        Cloud Platform Engineer at BCA, Indonesia's largest private bank, keeping
-        production platforms reliable at scale — Kubernetes/OpenShift clusters
-        running applications for developers across AWS, GCP, and on-premises
-        infrastructure. Former technical instructor who likes making complex
-        infrastructure simple.
+      <div class="p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl border border-blue-100 mb-10">
+        <p class="text-text leading-relaxed mb-0">
+          Hi! I'm a Cloud Platform Engineer at BCA, Indonesia's largest private bank.
+          My job is basically to keep things running so that millions of people can
+          transfer money, pay for stuff, and check their balances without thinking
+          about the infrastructure behind it. Spoiler: there's a lot of Kubernetes
+          involved.
+        </p>
+      </div>
+
+      <h2>What I Actually Do</h2>
+      <p>
+        I keep production platforms reliable at scale. That means Kubernetes/OpenShift
+        clusters running applications for developers across AWS, GCP, and on-premises
+        infrastructure. I also built an internal developer platform that about 90%
+        of the bank's developers now use to manage their own applications.
+      </p>
+      <p>
+        Before BCA, I spent several years as a technical instructor, teaching Linux
+        and DevOps to working professionals. That experience taught me something
+        valuable: if you can't explain a concept simply, you probably don't understand
+        it well enough. I try to bring that same clarity to my engineering work.
+      </p>
+      <p>
+        When I'm not debugging something at 2 AM (on-call life), I'm usually
+        thinking about how to make infrastructure simpler and more reliable.
+        Or explaining to someone why their pod keeps crashing. Usually both.
       </p>
 
-      <h2 class="text-xl font-semibold mt-8 mb-4">Certifications</h2>
-      <div class="space-y-3 mb-8">
+      <h2>Experience</h2>
+      <div class="space-y-6">
+        {experience.map(exp => (
+          <div class="p-5 border border-gray-200 rounded-lg hover:border-accent/30 transition-colors">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3">
+              <div>
+                <h3 class="text-lg font-semibold mb-1">{exp.title}</h3>
+                <p class="text-accent">{exp.company}</p>
+              </div>
+              <p class="text-sm text-muted mt-1 sm:mt-0">{exp.period}</p>
+            </div>
+            <ul class="space-y-2 mt-3">
+              {exp.highlights.map(highlight => (
+                <li class="flex items-start gap-2 text-muted">
+                  <span class="text-accent mt-1">▸</span>
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <h2>Certifications</h2>
+      <p class="text-muted mb-4">
+        Because sometimes you need a piece of paper to prove you know what you're doing.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         {certifications.map(cert => (
-          <div class="flex items-start gap-3 p-3 border border-gray-200 rounded-lg">
+          <div class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+            <span class="text-2xl">{cert.icon}</span>
             <div>
-              <p class="font-medium text-text">{cert.name}</p>
-              <p class="text-sm text-muted">{cert.org} · {cert.valid}</p>
+              <p class="font-medium text-text text-sm">{cert.name}</p>
+              <p class="text-xs text-muted mt-1">{cert.org}</p>
+              <p class="text-xs text-accent mt-1">{cert.valid}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <h2 class="text-xl font-semibold mt-8 mb-4">Skills</h2>
+      <h2>Skills & Tools</h2>
+      <p class="text-muted mb-4">
+        Things I use daily, weekly, or pretend to know really well in interviews.
+      </p>
       <div class="flex flex-wrap gap-2 mb-8">
         {skills.map(skill => (
           <span class={`tag tag-${getTagColor(skill)}`}>{skill}</span>
         ))}
       </div>
 
-      <h2 class="text-xl font-semibold mt-8 mb-4">Contact</h2>
-      <ul class="space-y-2 text-muted">
-        <li>
-          <a href="https://github.com/azemoning" class="text-accent hover:underline">GitHub</a>
-        </li>
-        <li>
-          <a href="https://linkedin.com/in/ahmadsaufimaulana" class="text-accent hover:underline">LinkedIn</a>
-        </li>
-        <li>
-          <a href="mailto:ahmadsaufimaulana@gmail.com" class="text-accent hover:underline">ahmadsaufimaulana@gmail.com</a>
-        </li>
-      </ul>
+      <h2>Let's Connect</h2>
+      <p class="mb-4">
+        I'm always happy to talk about Kubernetes, observability, or why your
+        Terraform state is locked. Feel free to reach out!
+      </p>
+      <div class="flex flex-col gap-3">
+        <a href="https://github.com/azemoning" target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-accent/50 hover:shadow-md transition-all">
+          <span class="text-xl">📦</span>
+          <div>
+            <p class="font-medium text-text">GitHub</p>
+            <p class="text-sm text-muted">Where my code lives (sometimes with bugs)</p>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/ahmadsaufimaulana" target="_blank" rel="noopener noreferrer"
+           class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-accent/50 hover:shadow-md transition-all">
+          <span class="text-xl">💼</span>
+          <div>
+            <p class="font-medium text-text">LinkedIn</p>
+            <p class="text-sm text-muted">Professional stuff and endorsements</p>
+          </div>
+        </a>
+        <a href="mailto:ahmadsaufimaulana@gmail.com"
+           class="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-accent/50 hover:shadow-md transition-all">
+          <span class="text-xl">📧</span>
+          <div>
+            <p class="font-medium text-text">Email</p>
+            <p class="text-sm text-muted">ahmadsaufimaulana@gmail.com</p>
+          </div>
+        </a>
+      </div>
     </div>
   </article>
 </BaseLayout>
