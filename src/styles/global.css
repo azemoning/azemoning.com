@@ -14,51 +14,98 @@
   --font-code: 'JetBrains Mono', monospace;
 }
 
-/* GitHub-style callouts/alerts */
+/* GitHub-style callouts/alerts - colorful version */
 blockquote:has(> [data-type="note"]),
 blockquote:has(> [data-type="tip"]),
 blockquote:has(> [data-type="warning"]),
 blockquote:has(> [data-type="caution"]) {
-  border-left-width: 4px;
+  border: 1px solid;
+  border-left-width: 5px;
+  border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   margin: 1.5rem 0;
+  position: relative;
 }
 
 blockquote:has(> [data-type="note"]) {
+  border-color: #93c5fd;
   border-left-color: #2563eb;
-  background-color: #eff6ff;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
 }
 
 blockquote:has(> [data-type="tip"]) {
+  border-color: #86efac;
   border-left-color: #16a34a;
-  background-color: #f0fdf4;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.1);
 }
 
 blockquote:has(> [data-type="warning"]) {
+  border-color: #fcd34d;
   border-left-color: #d97706;
-  background-color: #fffbeb;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.1);
 }
 
 blockquote:has(> [data-type="caution"]) {
+  border-color: #fca5a5;
   border-left-color: #dc2626;
-  background-color: #fef2f2;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.1);
 }
 
-/* Callout icons */
+/* Callout icons - styled badges */
 blockquote:has(> [data-type="note"]) > p:first-child::before {
-  content: "📝 ";
+  content: "📝 NOTE";
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
 }
 
 blockquote:has(> [data-type="tip"]) > p:first-child::before {
-  content: "💡 ";
+  content: "💡 TIP";
+  display: inline-block;
+  background: #16a34a;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
 }
 
 blockquote:has(> [data-type="warning"]) > p:first-child::before {
-  content: "⚠️ ";
+  content: "⚠️ WARNING";
+  display: inline-block;
+  background: #d97706;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
 }
 
 blockquote:has(> [data-type="caution"]) > p:first-child::before {
-  content: "🚨 ";
+  content: "🚨 CAUTION";
+  display: inline-block;
+  background: #dc2626;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
 }
 
 /* Footnotes styling */
