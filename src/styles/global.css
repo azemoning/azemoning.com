@@ -1,18 +1,7 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "katex/dist/katex.min.css";
-
-@theme {
-  --color-background: #ffffff;
-  --color-text: #1a1a2e;
-  --color-accent: #2563eb;
-  --color-muted: #6b7280;
-  --color-code-bg: #f8fafc;
-
-  --font-heading: 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-code: 'JetBrains Mono', monospace;
-}
 
 /* GitHub-style callouts/alerts */
 blockquote:has(> [data-type="note"]),
@@ -97,8 +86,8 @@ kbd {
   display: inline-block;
   padding: 0.125rem 0.5rem;
   font-size: 0.75rem;
-  font-family: var(--font-code);
-  color: var(--color-text);
+  font-family: 'JetBrains Mono', monospace;
+  color: #1a1a2e;
   background-color: #f3f4f6;
   border: 1px solid #d1d5db;
   border-radius: 0.25rem;
