@@ -253,6 +253,18 @@ kbd {
   box-shadow: 0 1px 0 #d1d5db;
 }
 
+/* Task lists - remove bullets since checkboxes are enough */
+.prose ul:has(input[type="checkbox"]) {
+  list-style: none;
+  padding-left: 0;
+}
+
+.prose ul:has(input[type="checkbox"]) li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 /* Details/Summary */
 details {
   margin: 1.5rem 0;
