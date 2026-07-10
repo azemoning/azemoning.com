@@ -5,6 +5,8 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkGithubBlockquoteAlert from 'remark-github-blockquote-alert';
+import remarkDefinitionList from 'remark-definition-list';
+import remarkAbbr from 'remark-abbr';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -48,6 +50,8 @@ export default defineConfig({
       remarkGfm,
       remarkMath,
       remarkGithubBlockquoteAlert,
+      remarkDefinitionList,
+      remarkAbbr,
     ],
     rehypePlugins: [
       rehypeKatex,
