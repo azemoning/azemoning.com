@@ -3,7 +3,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import projects from '../data/projects.json';
 
-const featuredProjects = projects.filter(p => p.featured).slice(0, 3);
+const featuredProjects = projects.filter(p => p.featured);
 
 const tagColors = ['blue', 'green', 'purple', 'orange', 'pink', 'cyan', 'red', 'yellow'];
 function getTagColor(tag: string) {
@@ -19,7 +19,7 @@ function getTagColor(tag: string) {
   <section class="max-w-[720px] mx-auto px-6 py-20">
     <h1 class="text-4xl font-bold mb-4">Hi, I'm Upi</h1>
     <p class="text-lg text-muted mb-8">
-      SRE / DevOps engineer passionate about infrastructure automation, observability, and cloud-native technologies.
+      Site Reliability & Cloud Platform Engineer passionate about infrastructure automation, observability, and cloud-native technologies.
     </p>
     <div class="flex gap-4">
       <a href="/projects" class="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors">
