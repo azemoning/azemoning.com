@@ -71,10 +71,10 @@ deb http://security.ubuntu.com/ubuntu focal-security main restricted universe mu
 ```
 
 The components:
-- `main` — officially supported, free software
-- `restricted` — officially supported, proprietary drivers
-- `universe` — community-maintained, free software
-- `multiverse` — non-free software with legal restrictions
+- `main` , officially supported, free software
+- `restricted` , officially supported, proprietary drivers
+- `universe` , community-maintained, free software
+- `multiverse` , non-free software with legal restrictions
 
 When adding third-party repositories, make sure they match your Ubuntu version. Mixing repos from the wrong release is the fastest way to get dependency conflicts.
 

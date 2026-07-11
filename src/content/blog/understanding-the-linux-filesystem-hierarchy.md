@@ -48,11 +48,11 @@ There's also `/var/tmp`, which usually survives reboots. The distinction matters
 
 **`/usr`** is the big one. It's the "secondary hierarchy" for user programs, and on modern systems it's where most things actually live:
 
-- `/usr/bin` — user commands
-- `/usr/sbin` — system commands
-- `/usr/lib` — libraries
-- `/usr/share` — architecture-independent data (man pages, icons, docs)
-- `/usr/local` — software you install yourself (not from the package manager)
+- `/usr/bin` , user commands
+- `/usr/sbin` , system commands
+- `/usr/lib` , libraries
+- `/usr/share` , architecture-independent data (man pages, icons, docs)
+- `/usr/local` , software you install yourself (not from the package manager)
 
 If you compile something from source, it goes in `/usr/local/bin`. That keeps it separate from package-managed binaries.
 
@@ -76,11 +76,11 @@ If you compile something from source, it goes in `/usr/local/bin`. That keeps it
 
 `/var/log` deserves its own mention because you'll be in it constantly:
 
-- `/var/log/syslog` — main system log on Debian/Ubuntu
-- `/var/log/auth.log` — authentication attempts (every SSH login, every sudo)
-- `/var/log/kern.log` — kernel messages
-- `/var/log/dmesg` — boot-time hardware messages
-- `/var/log/apt/` — package manager history
+- `/var/log/syslog` , main system log on Debian/Ubuntu
+- `/var/log/auth.log` , authentication attempts (every SSH login, every sudo)
+- `/var/log/kern.log` , kernel messages
+- `/var/log/dmesg` , boot-time hardware messages
+- `/var/log/apt/` , package manager history
 
 ## Where to put stuff
 

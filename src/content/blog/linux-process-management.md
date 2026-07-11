@@ -28,16 +28,16 @@ This is process management. Knowing what's running, understanding what it's doin
 ps aux
 ```
 
-- `a` — all users' processes
-- `u` — user-oriented format (shows CPU%, memory%, who owns it)
-- `x` — include processes without a terminal (daemons, services)
+- `a` , all users' processes
+- `u` , user-oriented format (shows CPU%, memory%, who owns it)
+- `x` , include processes without a terminal (daemons, services)
 
 Columns that matter:
 
-- `%CPU` — processor usage
-- `%MEM` — memory usage
-- `STAT` — process state
-- `COMMAND` — what's running
+- `%CPU` , processor usage
+- `%MEM` , memory usage
+- `STAT` , process state
+- `COMMAND` , what's running
 
 Filter by name:
 
@@ -69,11 +69,11 @@ This shows the full command, the user who started it, and when it started. Usual
 
 Inside top, useful keys:
 
-- `1` — show per-core CPU usage (helps distinguish "100% of one core" from "100% of all cores")
-- `M` — sort by memory
-- `P` — sort by CPU
-- `k` — kill a process by PID (prompts you for the PID and signal)
-- `q` — quit
+- `1` , show per-core CPU usage (helps distinguish "100% of one core" from "100% of all cores")
+- `M` , sort by memory
+- `P` , sort by CPU
+- `k` , kill a process by PID (prompts you for the PID and signal)
+- `q` , quit
 
 htop is better for longer monitoring:
 
@@ -88,11 +88,11 @@ Color display, mouse support, easier navigation, and you can search for processe
 
 The `STAT` column in `ps` output tells you what a process is doing:
 
-- `R` — running or runnable (on the CPU or waiting for CPU time)
-- `S` — sleeping (waiting for something: I/O, a signal, a timer)
-- `D` — disk sleep (uninterruptible, stuck waiting for I/O)
-- `Z` — zombie (process exited but its parent hasn't collected the exit status)
-- `T` — stopped (paused by a signal or Ctrl+Z)
+- `R` , running or runnable (on the CPU or waiting for CPU time)
+- `S` , sleeping (waiting for something: I/O, a signal, a timer)
+- `D` , disk sleep (uninterruptible, stuck waiting for I/O)
+- `Z` , zombie (process exited but its parent hasn't collected the exit status)
+- `T` , stopped (paused by a signal or Ctrl+Z)
 
 A few zombies are normal and harmless. The parent will clean them up eventually. Hundreds of zombies usually mean a parent process is buggy and not calling `wait()` on its children.
 
@@ -103,9 +103,9 @@ D state processes are stuck waiting for storage I/O. If you see many of them, yo
 Processes communicate via signals. The ones you'll use:
 
 ```bash
-kill PID              # SIGTERM (15) — asks the process to shut down gracefully
-kill -9 PID           # SIGKILL (9) — forces immediate death, no cleanup
-kill -HUP PID         # SIGHUP (1) — traditionally "reload config"
+kill PID              # SIGTERM (15) , asks the process to shut down gracefully
+kill -9 PID           # SIGKILL (9) , forces immediate death, no cleanup
+kill -HUP PID         # SIGHUP (1) , traditionally "reload config"
 kill -USR1 PID        # user-defined, often "reopen log file"
 ```
 

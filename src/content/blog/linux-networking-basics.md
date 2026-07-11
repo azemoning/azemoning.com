@@ -209,11 +209,11 @@ This is the foundation of container networking, by the way. Docker and Kubernete
 
 When something can't connect, work through this:
 
-1. `ping 127.0.0.1` — can you reach yourself? If not, the networking stack itself is broken
-2. `ping <gateway>` — can you reach the local network? If not, interface or cable problem
-3. `ping 8.8.8.8` — can you reach the internet? If not, routing or firewall problem
-4. `dig example.com` — can you resolve DNS? If not, DNS config problem
-5. `ss -tlnp | grep :80` — is the service actually listening?
+1. `ping 127.0.0.1` , can you reach yourself? If not, the networking stack itself is broken
+2. `ping <gateway>` , can you reach the local network? If not, interface or cable problem
+3. `ping 8.8.8.8` , can you reach the internet? If not, routing or firewall problem
+4. `dig example.com` , can you resolve DNS? If not, DNS config problem
+5. `ss -tlnp | grep :80` , is the service actually listening?
 
 Each step narrows the problem. If step 3 works but step 4 fails, you have a DNS issue, not a connectivity issue. This sequence has saved me hours of guessing.
 

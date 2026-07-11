@@ -64,9 +64,9 @@ findtime = 600
 ```
 
 What those mean:
-- `maxretry = 3` — three failed attempts triggers a ban
-- `findtime = 600` — the window for counting failures is 10 minutes
-- `bantime = 3600` — ban lasts 1 hour (3600 seconds)
+- `maxretry = 3` , three failed attempts triggers a ban
+- `findtime = 600` , the window for counting failures is 10 minutes
+- `bantime = 3600` , ban lasts 1 hour (3600 seconds)
 
 So: three wrong passwords in 10 minutes, and that IP is blocked for an hour.
 

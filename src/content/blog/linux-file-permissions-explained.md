@@ -29,10 +29,10 @@ Run `ls -l` on any file:
 
 That first column is the permission string. Let's break it apart:
 
-- `-` — file type. `-` is a regular file, `d` is a directory, `l` is a symlink
-- `rw-` — what the owner can do (read and write)
-- `r--` — what the group can do (read only)
-- `r--` — what everyone else can do (read only)
+- `-` , file type. `-` is a regular file, `d` is a directory, `l` is a symlink
+- `rw-` , what the owner can do (read and write)
+- `r--` , what the group can do (read only)
+- `r--` , what everyone else can do (read only)
 
 Three sets of three characters. Owner, group, others. Read, write, execute. That's the whole model.
 
@@ -50,10 +50,10 @@ So `chmod 644 config.yaml` means the owner gets 6 (read+write), the group gets 4
 Common ones you'll use constantly:
 
 ```bash
-chmod 644 config.yaml   # rw-r--r--  — typical for config files
-chmod 755 deploy.sh     # rwxr-xr-x  — scripts that anyone can run
-chmod 600 id_rsa        # rw-------  — private key, owner only
-chmod 700 ~/.ssh        # rwx------  — SSH directory, owner only
+chmod 644 config.yaml   # rw-r--r--  , typical for config files
+chmod 755 deploy.sh     # rwxr-xr-x  , scripts that anyone can run
+chmod 600 id_rsa        # rw-------  , private key, owner only
+chmod 700 ~/.ssh        # rwx------  , SSH directory, owner only
 ```
 
 After a while these become second nature. 644 for files, 755 for scripts, 600 for secrets.
@@ -88,7 +88,7 @@ This is weird at first but makes sense. Directory execute is about traversal, no
 
 ```bash
 chown upi:developers config.yaml
-chown -R upi:developers /opt/app/  # recursive — the whole tree
+chown -R upi:developers /opt/app/  # recursive , the whole tree
 chgrp developers /opt/app/logs/
 ```
 
@@ -121,8 +121,8 @@ Shared directories that need to be writable by multiple users should almost alwa
 setuid (numeric `4`) makes a file execute as its owner instead of the user who ran it. setgid (`2`) does the same for the group, or on a directory, makes new files inherit the directory's group.
 
 ```bash
-chmod 4755 /usr/bin/passwd    # setuid — runs as root
-chmod 2775 /opt/team/shared/  # setgid — new files get the team group
+chmod 4755 /usr/bin/passwd    # setuid , runs as root
+chmod 2775 /opt/team/shared/  # setgid , new files get the team group
 ```
 
 `passwd` needs setuid because it writes to `/etc/shadow`, which only root can access. That's one of the few legitimate uses. Be cautious with setuid on anything else, especially custom scripts. A setuid root script with a bug is a privilege escalation vulnerability.

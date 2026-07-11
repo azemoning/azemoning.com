@@ -98,10 +98,10 @@ Then restart journald. Without this, your journal might fill up the disk or get 
 
 Rsyslog writes the log files you probably already know:
 
-- `/var/log/syslog` — main system log
-- `/var/log/auth.log` — authentication (SSH logins, sudo, etc.)
-- `/var/log/kern.log` — kernel messages
-- `/var/log/daemon.log` — daemon messages
+- `/var/log/syslog` , main system log
+- `/var/log/auth.log` , authentication (SSH logins, sudo, etc.)
+- `/var/log/kern.log` , kernel messages
+- `/var/log/daemon.log` , daemon messages
 
 Configuration lives in `/etc/rsyslog.conf` and `/etc/rsyslog.d/`.
 
@@ -186,6 +186,6 @@ sudo logrotate -f /etc/logrotate.d/myapp    # force rotation now
 
 Check both journald and rsyslog when you can't find something. Services choose where to log, and they don't always choose what you'd expect.
 
-Set up log rotation from the start. I once had a server go down at 3 AM because a log file grew to 40GB and filled the disk. The application kept writing, the disk filled, and everything that depended on that disk stopped working.
+Set up log rotation from the start. I once had a server go down at 2 AM because a log file grew to 40GB and filled the disk. The application kept writing, the disk filled, and everything that depended on that disk stopped working.
 
 Don't forget about rotated logs. If the incident was yesterday, the log might be in `syslog.1` or `syslog.2.gz`. The answer is probably still there, just compressed.

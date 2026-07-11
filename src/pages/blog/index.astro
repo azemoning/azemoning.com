@@ -11,11 +11,6 @@ const allPosts = await getCollection('blog', ({ data }) => {
 const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const categories = [...new Set(sortedPosts.map(post => post.data.category))];
-
-const POSTS_PER_PAGE = 10;
-const currentPage = 1;
-const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
-const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
 ---
 
 <BaseLayout title="Blog" description="Articles on SRE, DevOps, and cloud-native technologies">
@@ -38,7 +33,7 @@ const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
     </div>
 
     <div id="posts-list" class="space-y-8">
-      {paginatedPosts.map(post => (
+      {sortedPosts.map(post => (
         <article class="post-item" data-category={post.data.category}>
           <a href={`/blog/${post.data.slug ?? post.id}/`} class="group block">
             <div class="flex items-center gap-4 text-sm text-muted mb-2">
@@ -57,24 +52,83 @@ const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
       ))}
     </div>
 
-    {totalPages > 1 && (
-      <nav class="flex justify-between items-center mt-12">
-        <div />
-        <span class="text-sm text-muted">
-          Page {currentPage} of {totalPages}
-        </span>
-        <a href="/blog/2" class="px-4 py-2 border border-gray-200 rounded hover:border-accent hover:text-accent transition-colors">
-          Next →
-        </a>
-      </nav>
-    )}
+    <nav id="pagination" class="flex justify-between items-center mt-12">
+      <div />
+      <span id="page-info" class="text-sm text-muted"></span>
+      <button id="next-btn" class="px-4 py-2 border border-gray-200 rounded hover:border-accent hover:text-accent transition-colors hidden">
+        Next →
+      </button>
+    </nav>
   </section>
 </BaseLayout>
 
 <script>
+  const POSTS_PER_PAGE = 10;
+  let currentPage = 1;
+  let currentCategory = 'all';
+
+  function getVisiblePosts() {
+    const items = document.querySelectorAll('.post-item');
+    return Array.from(items).filter(item => {
+      const cat = item.dataset.category;
+      return currentCategory === 'all' || cat === currentCategory;
+    });
+  }
+
+  function renderPage() {
+    const visiblePosts = getVisiblePosts();
+    const totalPages = Math.ceil(visiblePosts.length / POSTS_PER_PAGE);
+    const start = (currentPage - 1) * POSTS_PER_PAGE;
+    const end = start + POSTS_PER_PAGE;
+
+    // Hide all posts
+    document.querySelectorAll('.post-item').forEach(item => {
+      item.style.display = 'none';
+    });
+
+    // Show current page posts
+    visiblePosts.slice(start, end).forEach(item => {
+      item.style.display = 'block';
+    });
+
+    // Update pagination
+    const pageInfo = document.getElementById('page-info');
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+
+    if (pageInfo) {
+      if (totalPages > 1) {
+        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+      } else if (visiblePosts.length > 0) {
+        pageInfo.textContent = `${visiblePosts.length} post${visiblePosts.length !== 1 ? 's' : ''}`;
+      } else {
+        pageInfo.textContent = 'No posts found';
+      }
+    }
+
+    if (nextBtn) {
+      if (currentPage < totalPages) {
+        nextBtn.classList.remove('hidden');
+      } else {
+        nextBtn.classList.add('hidden');
+      }
+    }
+
+    if (prevBtn) {
+      if (currentPage > 1) {
+        prevBtn.classList.remove('hidden');
+      } else {
+        prevBtn.classList.add('hidden');
+      }
+    }
+  }
+
+  // Category filter
   document.querySelectorAll('.category-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const category = btn.dataset.category;
+      currentCategory = category;
+      currentPage = 1;
 
       document.querySelectorAll('.category-btn').forEach(b => {
         b.classList.remove('border-accent', 'text-accent', 'active');
@@ -83,13 +137,35 @@ const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
       btn.classList.add('border-accent', 'text-accent', 'active');
       btn.classList.remove('border-gray-200');
 
-      document.querySelectorAll('.post-item').forEach(item => {
-        if (category === 'all' || item.dataset.category === category) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
+      renderPage();
     });
   });
+
+  // Pagination buttons
+  const nextBtn = document.getElementById('next-btn');
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentPage++;
+      renderPage();
+      window.scrollTo(0, 0);
+    });
+  }
+
+  // Add prev button dynamically
+  const pagination = document.getElementById('pagination');
+  if (pagination) {
+    const prevBtn = document.createElement('button');
+    prevBtn.id = 'prev-btn';
+    prevBtn.className = 'px-4 py-2 border border-gray-200 rounded hover:border-accent hover:text-accent transition-colors hidden';
+    prevBtn.textContent = '← Previous';
+    prevBtn.addEventListener('click', () => {
+      currentPage--;
+      renderPage();
+      window.scrollTo(0, 0);
+    });
+    pagination.insertBefore(prevBtn, pagination.firstChild);
+  }
+
+  // Initial render
+  renderPage();
 </script>

@@ -37,11 +37,11 @@ Configure which directories to share and with whom in `/etc/exports`:
 
 This shares `/srv/nfs/shared` with every machine on the 192.168.1.0/24 subnet. The options:
 
-- `rw` — read-write (use `ro` if you only need read access)
-- `sync` — write to disk before replying to the client (safer, slightly slower)
-- `no_subtree_check` — skip subtree verification (recommended, improves reliability)
-- `root_squash` — the default; maps root on the client to nobody on the server. Keep this. It prevents a compromised client from owning the share.
-- `no_root_squash` — lets root on the client be root on the share. Dangerous. Only use this if you fully trust every client machine.
+- `rw` , read-write (use `ro` if you only need read access)
+- `sync` , write to disk before replying to the client (safer, slightly slower)
+- `no_subtree_check` , skip subtree verification (recommended, improves reliability)
+- `root_squash` , the default; maps root on the client to nobody on the server. Keep this. It prevents a compromised client from owning the share.
+- `no_root_squash` , lets root on the client be root on the share. Dangerous. Only use this if you fully trust every client machine.
 
 Apply the exports and start the server:
 
@@ -99,9 +99,9 @@ Mount options that matter:
 nfs-server:/share /mnt nfs rw,hard,intr,rsize=32768,wsize=32768 0 0
 ```
 
-- `hard` — retry indefinitely if the server is unavailable. Use this for anything important. The alternative, `soft`, returns an error after a timeout and can cause data corruption.
-- `intr` — lets you interrupt hung NFS operations (Ctrl+C works).
-- `rsize`/`wsize` — read/write block sizes. Larger values mean better throughput on fast networks. 32768 is a good starting point.
+- `hard` , retry indefinitely if the server is unavailable. Use this for anything important. The alternative, `soft`, returns an error after a timeout and can cause data corruption.
+- `intr` , lets you interrupt hung NFS operations (Ctrl+C works).
+- `rsize`/`wsize` , read/write block sizes. Larger values mean better throughput on fast networks. 32768 is a good starting point.
 
 For NFSv4:
 

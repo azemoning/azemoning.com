@@ -45,11 +45,11 @@ A few examples:
 
 There are also shortcut strings you can use instead of the five time fields:
 
-- `@reboot` — run once at startup
-- `@daily` or `@midnight` — once a day
-- `@hourly` — once an hour
-- `@weekly` — once a week
-- `@monthly` — once a month
+- `@reboot` , run once at startup
+- `@daily` or `@midnight` , once a day
+- `@hourly` , once an hour
+- `@weekly` , once a week
+- `@monthly` , once a month
 
 ```
 @reboot /opt/scripts/start-services.sh
@@ -81,7 +81,7 @@ The second most common reason: the last line in a crontab must end with a newlin
 In cron syntax, `%` is treated as a newline. This means if your command uses `%` in a date format or anywhere else, you need to escape it:
 
 ```bash
-# This breaks — cron interprets the % as line breaks
+# This breaks , cron interprets the % as line breaks
 0 2 * * * date +%Y-%m-%d > /tmp/date.txt
 
 # This works
@@ -125,7 +125,7 @@ Use a lockfile:
 exec 200>/var/lock/myjob.lock
 flock -n 200 || exit 1
 
-# rest of script — only one instance runs at a time
+# rest of script , only one instance runs at a time
 ```
 
 `flock -n` tries to acquire the lock and exits immediately if another instance holds it. This is simple and reliable. For longer-running jobs, consider putting this in the script itself rather than relying on timing.

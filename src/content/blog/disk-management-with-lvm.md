@@ -8,9 +8,9 @@ readingTime: "9 min read"
 excerpt: "Logical Volume Management: resizing partitions without reboots, adding disks on the fly, and snapshots."
 ---
 
-It's 3 AM (why is it always 3 AM?). You get an alert: `/data` is 98% full. The database can't write, the application is throwing errors, and users are seeing 500s.
+It's 4 AM (why is it always the middle of the night?). You get an alert: `/data` is 98% full. The database can't write, the application is throwing errors, and users are seeing 500s.
 
-You SSH in and check. The partition is 100GB. The database has grown. You need more space, and you need it now. If you set up the server with plain partitions, you're looking at: buy a bigger disk, boot from a rescue image, resize or copy the partition, hope nothing breaks, reboot. That's a 2 AM maintenance window on a good day.
+You SSH in and check. The partition is 100GB. The database has grown. You need more space, and you need it now. If you set up the server with plain partitions, you're looking at: buy a bigger disk, boot from a rescue image, resize or copy the partition, hope nothing breaks, reboot. That's a midnight maintenance window on a good day.
 
 If you set up the server with LVM, it's this:
 
@@ -26,9 +26,9 @@ Done. The logical volume is 50GB bigger. The filesystem expanded to fill it. No 
 
 LVM (Logical Volume Manager) sits between your physical disks and your filesystems. Instead of formatting a partition directly, you build a three-layer stack:
 
-1. **Physical volumes (PV)** — actual disks or partitions
-2. **Volume groups (VG)** — pools of storage made from one or more PVs
-3. **Logical volumes (LV)** — virtual partitions carved out of VGs
+1. **Physical volumes (PV)** , actual disks or partitions
+2. **Volume groups (VG)** , pools of storage made from one or more PVs
+3. **Logical volumes (LV)** , virtual partitions carved out of VGs
 
 Think of it as: disks become a storage pool, and you carve slices from the pool. The slices can be bigger than any single disk, and you can resize them while the system is running.
 

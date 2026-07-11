@@ -141,10 +141,10 @@ The double colon triggers daemon mode. For most use cases, SSH mode is fine. Dae
 
 rsync shows you what changed:
 
-- `>f+++++++++` — new file
-- `>f..t......` — timestamp changed
-- `>f.st......` — size and timestamp changed
-- `*deleting` — file removed at destination (with `--delete`)
+- `>f+++++++++` , new file
+- `>f..t......` , timestamp changed
+- `>f.st......` , size and timestamp changed
+- `*deleting` , file removed at destination (with `--delete`)
 
 The dots represent what changed: size, timestamp, permissions, etc. A line of dots means nothing changed for that attribute.
 

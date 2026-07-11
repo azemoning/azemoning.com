@@ -96,7 +96,7 @@ The `si` (swap in) and `so` (swap out) columns show pages swapped per second. Bo
 
 Running without swap means the OOM killer activates the moment RAM runs out. On a desktop, that might mean your browser gets killed. On a server, that might mean your database gets killed. A small swap (even 1GB) gives the system breathing room during memory spikes.
 
-The counterargument is: "I'd rather fail fast than grind to a halt." That's valid for some workloads. But for most servers, a 2GB swap that never gets touched is better than a hard OOM kill at 3 AM.
+The counterargument is: "I'd rather fail fast than grind to a halt." That's valid for some workloads. But for most servers, a 2GB swap that never gets touched is better than a hard OOM kill at midnight.
 
 The people running 32GB of swap on an 8GB server, though? They're doing it wrong. The system will become unresponsive long before it fills that swap, and instead of failing fast, it'll be useless for hours.
 

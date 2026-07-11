@@ -20,10 +20,10 @@ That framework is PAM: Pluggable Authentication Modules. Understanding it means 
 
 PAM splits authentication into four concerns:
 
-- **auth** — Are you who you claim to be? (password check, biometric, token)
-- **account** — Are you allowed in right now? (account expired? time restrictions? locked?)
-- **password** — Handle password changes (complexity rules, history)
-- **session** — Set up the environment after successful login (mount home dir, set resource limits, log the access)
+- **auth** , Are you who you claim to be? (password check, biometric, token)
+- **account** , Are you allowed in right now? (account expired? time restrictions? locked?)
+- **password** , Handle password changes (complexity rules, history)
+- **session** , Set up the environment after successful login (mount home dir, set resource limits, log the access)
 
 Every service that uses PAM has a stack of modules for each group. When you log in, PAM runs through the stacks in order. Each module either succeeds, fails, or says "I don't care" (optional).
 
@@ -31,10 +31,10 @@ Every service that uses PAM has a stack of modules for each group. When you log 
 
 PAM configs live in `/etc/pam.d/`. Each service gets its own file:
 
-- `/etc/pam.d/login` — console login
-- `/etc/pam.d/sshd` — SSH
-- `/etc/pam.d/sudo` — sudo
-- `/etc/pam.d/common-auth` — shared auth rules (included by other files)
+- `/etc/pam.d/login` , console login
+- `/etc/pam.d/sshd` , SSH
+- `/etc/pam.d/sudo` , sudo
+- `/etc/pam.d/common-auth` , shared auth rules (included by other files)
 
 A config line looks like this:
 
@@ -48,29 +48,29 @@ Four fields: module-type (`auth`), control-flag (`required`), module-path (`pam_
 
 This is where most people get tripped up:
 
-- **required** — Must succeed. If it fails, authentication fails. But PAM continues checking other modules before returning the failure. (This is to avoid leaking information about which specific module failed.)
-- **requisite** — Must succeed. If it fails, authentication fails immediately. No further checks.
-- **sufficient** — If this succeeds and no prior `required` module has failed, authentication succeeds immediately. No need to check further.
-- **optional** — This module's result only matters if it's the only module in the stack.
-- **include** — Pull in another config file's rules.
+- **required** , Must succeed. If it fails, authentication fails. But PAM continues checking other modules before returning the failure. (This is to avoid leaking information about which specific module failed.)
+- **requisite** , Must succeed. If it fails, authentication fails immediately. No further checks.
+- **sufficient** , If this succeeds and no prior `required` module has failed, authentication succeeds immediately. No need to check further.
+- **optional** , This module's result only matters if it's the only module in the stack.
+- **include** , Pull in another config file's rules.
 
 The difference between `required` and `requisite` is subtle but important. Both cause failure when they fail. The difference is timing: `required` lets the rest of the stack run first, `requisite` stops immediately.
 
 ## Common modules
 
-**pam_unix.so** — The standard. Checks the password against `/etc/shadow`. This is what most systems use for basic password authentication.
+**pam_unix.so** , The standard. Checks the password against `/etc/shadow`. This is what most systems use for basic password authentication.
 
 ```
 auth required pam_unix.so
 ```
 
-**pam_permit.so** — Always succeeds. Used when you want to allow something without checking. Sounds weird but it's useful as a default.
+**pam_permit.so** , Always succeeds. Used when you want to allow something without checking. Sounds weird but it's useful as a default.
 
-**pam_deny.so** — Always fails. Put it at the end of a stack as a default-deny policy.
+**pam_deny.so** , Always fails. Put it at the end of a stack as a default-deny policy.
 
-**pam_limits.so** — Sets resource limits from `/etc/security/limits.conf`. Think max open files, max processes, that sort of thing.
+**pam_limits.so** , Sets resource limits from `/etc/security/limits.conf`. Think max open files, max processes, that sort of thing.
 
-**pam_env.so** — Sets environment variables from `/etc/security/pam_env.conf`.
+**pam_env.so** , Sets environment variables from `/etc/security/pam_env.conf`.
 
 ## Password policies
 
@@ -80,9 +80,9 @@ Want to enforce minimum password length and complexity? Edit `/etc/pam.d/common-
 password requisite pam_pwquality.so retry=3 minlen=12 difok=3
 ```
 
-- `minlen=12` — minimum 12 characters
-- `difok=3` — at least 3 characters must differ from the old password
-- `retry=3` — three attempts before giving up
+- `minlen=12` , minimum 12 characters
+- `difok=3` , at least 3 characters must differ from the old password
+- `retry=3` , three attempts before giving up
 
 Account lockout after failed attempts, in `/etc/pam.d/common-auth`:
 

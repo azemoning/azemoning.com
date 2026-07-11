@@ -12,7 +12,7 @@ excerpt: "The minimum vim knowledge you need to survive on a Linux server. Editi
 
 <!-- truncate -->
 
-Because you don't have a choice. vim (or vi) is installed on virtually every Linux server. When you SSH into a production machine to fix a config file at 2 AM, vim is what's there. Not VS Code. Not nano (usually). vim. You can hate it all you want, but you need to be able to open a file, change something, and save it without losing your mind.
+Because you don't have a choice. vim (or vi) is installed on virtually every Linux server. When you SSH into a production machine to fix a config file at 4 AM, vim is what's there. Not VS Code. Not nano (usually). vim. You can hate it all you want, but you need to be able to open a file, change something, and save it without losing your mind.
 
 The good news: the minimum viable vim knowledge is about 10 commands. You don't need to become a vim power user. You need to survive.
 
@@ -36,49 +36,49 @@ You're looking at the file. You can't edit it yet.
 
 **Getting into Insert mode:**
 
-- `i` — start typing before the cursor
-- `a` — start typing after the cursor
-- `o` — open a new line below and start typing
+- `i` , start typing before the cursor
+- `a` , start typing after the cursor
+- `o` , open a new line below and start typing
 
 `i` is the one you'll use most. Press it, type your changes.
 
 **Getting out of Insert mode:**
 
-- `Esc` — back to Normal mode
+- `Esc` , back to Normal mode
 
 **Saving and quitting (from Normal mode):**
 
-- `:w` — save
-- `:q` — quit
-- `:wq` — save and quit
-- `:q!` — quit without saving (the panic button)
+- `:w` , save
+- `:q` , quit
+- `:wq` , save and quit
+- `:q!` , quit without saving (the panic button)
 
 If you're stuck and nothing makes sense, `Esc` then `:q!` gets you out. Your changes are lost, but you're free.
 
 **Moving around (Normal mode):**
 
 - Arrow keys work (ignore anyone who says you must use hjkl)
-- `gg` — go to the top of the file
-- `G` — go to the bottom
-- `/something` — search for "something"
-- `n` — next search result
+- `gg` , go to the top of the file
+- `G` , go to the bottom
+- `/something` , search for "something"
+- `n` , next search result
 
 That's it. You can now open files, navigate, make changes, and save. Everything below is convenience.
 
 ## Deleting stuff
 
-- `x` — delete the character under the cursor
-- `dd` — delete the entire line
-- `dw` — delete a word
-- `3dd` — delete 3 lines
+- `x` , delete the character under the cursor
+- `dd` , delete the entire line
+- `dw` , delete a word
+- `3dd` , delete 3 lines
 
 `dd` is the one I use constantly. Bad line? `dd`. Gone.
 
 ## Copy and paste
 
-- `yy` — copy the current line
-- `3yy` — copy 3 lines
-- `p` — paste below the cursor
+- `yy` , copy the current line
+- `3yy` , copy 3 lines
+- `p` , paste below the cursor
 
 Copy-paste in vim is called "yank and put" for historical reasons. `yy` to yank, `p` to put. It works.
 
@@ -125,8 +125,8 @@ The `#` appears on all selected lines at once. This is the one vim trick that ac
 
 ## Undo
 
-- `u` — undo
-- `Ctrl+r` — redo
+- `u` , undo
+- `Ctrl+r` , redo
 
 Vim's undo is powerful. It tracks changes across insertions. `u` multiple times walks back through your editing history.
 
