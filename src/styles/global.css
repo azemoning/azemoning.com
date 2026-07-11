@@ -289,3 +289,26 @@ details summary {
 details[open] summary {
   margin-bottom: 1rem;
 }
+
+/* Code blocks - prevent horizontal overflow on mobile */
+.prose pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.prose code {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Tables - prevent horizontal overflow on mobile */
+.prose table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.prose thead {
+  display: table-header-group;
+}
+
