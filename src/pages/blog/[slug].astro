@@ -127,7 +127,7 @@ function getTagColor(tag: string) {
         wrapper.className = 'code-block-wrapper';
 
         const code = pre.querySelector('code');
-        const lang = (code?.className.match(/language-(\w+)/)?.[1] || '').toLowerCase();
+        const lang = (pre.dataset.language || code?.className.match(/language-(\w+)/)?.[1] || '').toLowerCase();
 
         if (lang) {
           const label = document.createElement('span');
